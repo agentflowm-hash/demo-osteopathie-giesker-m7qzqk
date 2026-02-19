@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osteopathie Giesker – Gesundheits‑ und Wellnessbranche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ==== DESIGN VARIABLES ==== */
+    :root {
+      --primary: #c1a8a1;
+      --primary-dark: #a89490;
+      --primary-light: #e5dcd8;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+    }
+
+    /* ==== ANIMATIONS ==== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    @keyframes pulsate {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* ==== GLOBAL ==== */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+    img { display:block; width:100%; height:auto; }
+    a { color:inherit; text-decoration:none; }
+    .container { max-width:1200px; margin:auto; padding:0 24px; }
+
+    /* ==== TYPOGRAPHY ==== */
+    h1 { font-size:clamp(2.5rem,5vw,4rem); font-weight:800; line-height:1.1; letter-spacing:-0.02em; color:var(--text); }
+    h2 { font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--text); letter-spacing:-0.01em; }
+    p { font-size:1.125rem; line-height:1.7; color:var(--text-muted); }
+
+    /* ==== BUTTONS ==== */
+    .btn {
+      padding:16px 32px;
+      border-radius:50px;
+      font-weight:600;
+      border:none;
+      cursor:pointer;
+      transition:all .3s cubic-bezier(.4,0,.2,1);
+    }
+    .btn-primary {
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 4px 20px rgba(0,0,0,.15);
+    }
+    .btn-primary:hover {
+      transform:translateY(-4px) scale(1.02);
+      box-shadow:0 12px 35px rgba(0,0,0,.25);
+    }
+    .btn-secondary {
+      background:#fff;
+      color:var(--text);
+      border:2px solid #e2e8f0;
+      border-radius:50px;
+    }
+    .btn-secondary:hover {
+      border-color:var(--primary);
+      color:var(--primary);
+    }
+
+    /* ==== CARDS ==== */
+    .card {
+      background:#fff;
+      border-radius:24px;
+      padding:36px;
+      border:1px solid rgba(0,0,0,.05);
+      box-shadow:0 4px 25px rgba(0,0,0,.06);
+      transition:all .4s cubic-bezier(.4,0,.2,1);
+      animation:fadeInUp .6s ease backwards;
+    }
+    .card:hover {
+      transform:translateY(-12px);
+      box-shadow:0 25px 60px rgba(0,0,0,.12);
+    }
+    .card-icon {
+      width:70px; height:70px;
+      background:var(--primary-light);
+      border-radius:20px;
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:24px;
+    }
+    .card-icon i {
+      font-size:1.75rem; color:var(--primary);
+    }
+    .card-title { font-weight:700; margin-bottom:12px; }
+    .card-text { font-size:.95rem; color:var(--text-muted); }
+
+    /* ==== GRID ==== */
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+    @media(max-width:900px){ .grid-3{grid-template-columns:1fr;} }
+
+    /* ==== BADGE ==== */
+    .badge {
+      display:inline-block;
+      padding:12px 28px;
+      border-radius:50px;
+      background:var(--primary-light);
+      color:var(--primary);
+      font-weight:600;
+      font-size:.9rem;
+      margin-bottom:24px;
+      animation:fadeInDown .6s ease;
+    }
+
+    /* ==== HERO ==== */
+    .hero { position:relative; overflow:hidden; }
+    .hero .badge { animation-delay:0s; }
+    .hero h1 { animation-delay:.1s; }
+    .hero p { animation-delay:.2s; }
+    .hero .btn { animation-delay:.3s; }
+    .hero-image {
+      position:relative;
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:0 30px 80px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.05);
+      animation:scaleIn 1s ease .4s backwards;
+    }
+    .hero-image img { transition:transform .7s cubic-bezier(.4,0,.2,1); }
+    .hero-image:hover img { transform:scale(1.05); }
+    .hero-image::before {
+      content:'';
+      position:absolute;
+      bottom:0; left:0; right:0;
+      height:50%;
+      background:linear-gradient(to top, rgba(0,0,0,.4), transparent);
+      z-index:1; pointer-events:none;
+    }
+    .hero-image::after {
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:40%;
+      background:linear-gradient(to bottom, rgba(255,255,255,.15), transparent);
+      z-index:2; pointer-events:none;
+    }
+
+    /* ==== TRUST BAR ==== */
+    .trust-bar { display:flex; justify-content:center; gap:24px; margin:48px 0; }
+    .trust-item {
+      display:flex; align-items:center; gap:8px;
+      font-weight:600; color:var(--primary);
+    }
+
+    /* ==== STEPS ==== */
+    .step-number {
+      width:70px; height:70px;
+      background:var(--primary);
+      color:#fff; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; font-weight:700;
+      margin:0 auto 20px;
+      transition:all .3s ease;
+      box-shadow:0 8px 25px rgba(0,0,0,.15);
+    }
+    .step-number:hover {
+      transform:scale(1.15);
+      box-shadow:0 15px 40px rgba(0,0,0,.2);
+    }
+
+    /* ==== FAQ ==== */
+    .faq-item {
+      background:#fff;
+      border-radius:20px;
+      padding:28px 32px;
+      margin-bottom:16px;
+      border:1px solid #f1f5f9;
+      transition:all .3s ease;
+      animation:fadeInUp .6s ease backwards;
+    }
+    .faq-item:hover {
+      transform:translateX(8px);
+      border-left:4px solid var(--primary);
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    .faq-item h3 { margin-bottom:8px; font-weight:600; }
+    .faq-item p { font-size:.95rem; color:var(--text-muted); }
+
+    /* ==== CTA ==== */
+    .cta-section {
+      background:var(--primary);
+      color:#fff;
+      text-align:center;
+      padding:80px 0;
+    }
+    .cta-section .btn-primary { animation:fadeInUp .6s ease backwards; animation-delay:.3s; }
+    .cta-section .btn-primary:hover { animation:pulsate .8s infinite alternate; }
+
+    /* ==== FOOTER ==== */
+    footer {
+      background:#0f172a;
+      color:#c1a8a1;
+      text-align:center;
+      padding:40px 0;
+      font-weight:500;
+    }
+
+    /* ==== ICON FLOAT ==== */
+    .card-icon { animation:float 3s ease-in-out infinite; }
+  </style>
+
+<script id="wz-kontakt-script">
+document.addEventListener('DOMContentLoaded', function() {
+  var forms = document.querySelectorAll('form');
+  forms.forEach(function(form) {
+    if (form.__wzBound) return;
+    if (form.querySelector('input[type="email"]') && form.querySelector('textarea')) {
+      form.__wzBound = true;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var fd = new FormData(form);
+        var data = {
+          name: fd.get('name') || fd.get('Name') || '',
+          email: fd.get('email') || fd.get('Email') || '',
+          phone: fd.get('phone') || fd.get('telefon') || '',
+          message: fd.get('message') || fd.get('nachricht') || '',
+          firma: 'Osteopathie Giesker',
+          demo_url: window.location.href
+        };
+        var btn = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (btn) btn.disabled = true;
+
+        fetch('https://6aa2-31-17-18-172.ngrok-free.app/webhook/kontakt-formular', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        })
+        .then(function(r){ return r.json(); })
+        .then(function(res){
+          alert(res && res.success ? 'Danke! Wir melden uns.' : 'Fehler: ' + (res && res.message ? res.message : 'Unbekannt'));
+          if (res && res.success) form.reset();
+        })
+        .catch(function(){
+          alert('Fehler. Bitte kontakt@agentflowm.de kontaktieren.');
+        })
+        .finally(function(){
+          if (btn) btn.disabled = false;
+        });
+      });
+    }
+  });
+});
+</script>
+
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="container" style="position:sticky;top:0;background:var(--bg);backdrop-filter:blur(10px);z-index:1000;padding:16px 0;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div style="font-weight:700;color:var(--primary);font-size:1.5rem;">Osteopathie Giesker</div>
+      <nav style="display:flex;gap:24px;">
+        <a href="#" style="color:var(--text);font-weight:500;">Home</a>
+        <a href="#" style="color:var(--text);font-weight:500;">Über Uns</a>
+        <a href="#" style="color:var(--text);font-weight:500;">Leistungen</a>
+        <a href="#" style="color:var(--text);font-weight:500;">Kontakt</a>
+      </nav>
+      <button class="btn btn-primary">Jetzt Termin</button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero container" style="padding:100px 0;text-align:center;background:var(--bg);">
+    <div class="badge">Gesundheits‑ und Wellnessbranche – Berlin</div>
+    <h1>Optimale Gesundheit beginnt hier</h1>
+    <p>Individuelle osteopathische Behandlungen für ein Leben in Balance und Vitalität.</p>
+    <div style="margin-top:32px;">
+      <button class="btn btn-primary">Termin buchen</button>
+      <button class="btn btn-secondary">Mehr erfahren</button>
+    </div>
+    <div class="hero-image" style="margin-top:48px;">
+      <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=900&h=500&fit=crop" alt="Modernes osteopathisches Studio">
+    </div>
+  </section>
+
+  <!-- ===== TRUST BAR ===== -->
+  <section class="trust-bar container">
+    <div class="trust-item"><i class="fas fa-calendar-alt"></i>Terminflexibilität</div>
+    <div class="trust-item"><i class="fas fa-shield-alt"></i>Sicher & Vertrauensvoll</div>
+    <div class="trust-item"><i class="fas fa-smile"></i>Langfristige Ergebnisse</div>
+    <div class="trust-item"><i class="fas fa-map-marker-alt"></i>Berliner Expertise</div>
+  </section>
+
+  <!-- ===== VORTEILE (3 CARDS) ===== -->
+  <section style="padding:100px 0;background:var(--bg);">
+    <div class="grid-3 container">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+        <div class="card-title">Manuelle Therapie</div>
+        <p class="card-text">Sanfte Techniken zur Linderung von Schmerzen und Verbesserung der Beweglichkeit.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="card-title">Individuelle Planung</div>
+        <p class="card-text">Persönliche Behandlungspläne, abgestimmt auf Ihre Bedürfnisse.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
+        <div class="card-title">Flexible Öffnungszeiten</div>
+        <p class="card-text">Termine auch außerhalb der regulären Öffnungszeiten – für Ihren Komfort.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEISTUNGEN (4 CARDS) ===== -->
+  <section style="padding:100px 0;background:var(--bg);">
+    <div class="grid-3 container">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-painter"></i></div>
+        <div class="card-title">Osteopathie</div>
+        <p class="card-text"> ganzheitliche Behandlung von Bewegungsstörungen und Funktionsblockaden.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-yoga"></i></div>
+        <div class="card-title">Wellness‑Programme</div>
+        <p class="card-text">Entspannungs- und Präventionsprogramme für Körper und Geist.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-nutrition"></i></div>
+        <div class="card-title">Ernährungsberatung</div>
+        <p class="card-text">Unterstützung durch maßgeschneiderte Ernährungspläne.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-pulse"></i></div>
+        <div class="card-title">Post‑Reha‑Begleitung</div>
+        <p class="card-text">Begleitung nach Operationen oder Verletzungen zur schnelleren Genesung.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABLAUF (3 STEPS) ===== -->
+  <section style="padding:100px 0;background:var(--bg);">
+    <div class="grid-3 container">
+      <div class="step-number">1</div>
+      <div class="step-number">2</div>
+      <div class="step-number">3</div>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);margin-top:24px;">Ihre Reise zu mehr Gesundheit in drei einfachen Schritten</p>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section style="padding:100px 0;background:var(--bg);">
+    <div class="container">
+      <h2 style="text-align:center;margin-bottom:48px;">Häufig gestellte Fragen</h2>
+      <div class="grid-3 container">
+        <div class="faq-item">
+          <h3>Was ist Osteopathie?</h3>
+          <p>Osteopathie ist eine manuelle Therapie, die darauf abzielt, Blockaden im Bewegungsapparat zu lösen und die Selbstheilungskräfte zu aktivieren.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Wie lange dauert eine Sitzung?</h3>
+          <p>Eine typische Sitzung dauert zwischen 45 und 60 Minuten, je nach Umfang der Behandlung.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Welche Beschwerden können behandelt werden?</h3>
+          <p>Rückenschmerzen, Nackenverspannungen, Gelenksbeschwerden, Kopfschmerzen und viele weitere Beschwerden.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Benötige ich eine Überweisung?</h3>
+          <p>Nein, eine Überweisung ist nicht erforderlich. Sie können direkt einen Termin vereinbaren.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="cta-section container">
+    <h2>Jetzt Ihre erste Sitzung vereinbaren</h2>
+    <button class="btn btn-primary">Termin buchen</button>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2026 Osteopathie Giesker – Gesundheits‑ und Wellnessbranche</p>
+  </footer>
+
+
+<div id="wz-banner" style="
+  position:fixed; bottom:0; left:0; right:0;
+  background:#000;
+  color:#fff;
+  padding:0;
+  z-index:99999;
+  box-shadow: 0 -4px 30px rgba(255,106,0,0.2);
+  font-family: system-ui, -apple-system, sans-serif;
+  border-top: 2px solid #ff6a00;
+">
+  <!-- Hauptbereich -->
+  <div style="
+    max-width:1200px;
+    margin:0 auto;
+    padding:20px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  ">
+    <!-- Links: Badge + Text -->
+    <div style="flex:1; min-width:320px; display:flex; align-items:center; gap:16px;">
+      
+      <!-- KI Demo Badge -->
+      <div style="
+        background:#111;
+        border: 2px solid #ff6a00;
+        border-radius:10px;
+        padding:10px 14px;
+        text-align:center;
+        flex-shrink:0;
+      ">
+        <div style="font-size:9px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:1px;">KI-generiert</div>
+        <div style="font-size:14px; font-weight:800; color:#ff6a00; margin-top:2px;">DEMO</div>
+      </div>
+      
+      <!-- Haupttext -->
+      <div>
+        <div style="font-size:16px; font-weight:800; color:#fff; line-height:1.3; margin-bottom:6px;">
+          Diese Seite wurde <span style="color:#ff6a00;">automatisch erstellt</span> – in Sekunden.
+        </div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.5;">
+          Unsere echten Projekte sind <span style="color:#fff; font-weight:600;">individuell designed</span>: 
+          <span style="color:#ff6a00;">Website</span> · 
+          <span style="color:#ff6a00;">App</span> · 
+          <span style="color:#ff6a00;">Verwaltung</span> · 
+          <span style="color:#ff6a00;">Automatisierungen</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rechts: Buttons -->
+    <div style="display:flex; gap:12px; align-items:center; flex-shrink:0;">
+      
+      <!-- Primary CTA -->
+      <a href="https://calendly.com/agentflowm/15min" target="_blank" rel="noopener" style="
+        padding:14px 28px;
+        background:#ff6a00;
+        color:#fff;
+        text-decoration:none;
+        border-radius:8px;
+        font-weight:700;
+        font-size:14px;
+        box-shadow: 0 4px 20px rgba(255,106,0,0.5);
+        white-space:nowrap;
+        border:none;
+      ">Premium-Website anfragen</a>
+
+      <!-- Secondary -->
+      <a href="https://www.agentflowm.de" target="_blank" rel="noopener" style="
+        padding:14px 20px;
+        background:transparent;
+        color:#fff;
+        text-decoration:none;
+        border-radius:8px;
+        font-weight:600;
+        font-size:14px;
+        border: 2px solid rgba(255,255,255,0.3);
+        white-space:nowrap;
+      ">Echte Projekte ansehen</a>
+      
+    </div>
+  </div>
+  
+  <!-- Footer-Zeile -->
+  <div style="
+    background:#111;
+    padding:12px 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  ">
+    <div style="
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:16px;
+    ">
+      <!-- Links: Branding -->
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:12px; color:rgba(255,255,255,0.5);">Erstellt von</span>
+        <span style="font-size:13px; font-weight:800; color:#ff6a00;">AgentFlow</span>
+        <span style="font-size:11px; color:rgba(255,255,255,0.4);">– Webseiten & Systeme aus Berlin</span>
+      </div>
+      
+      <!-- Rechts: Trust Points -->
+      <div style="display:flex; align-items:center; gap:20px; font-size:12px;">
+        <span style="color:rgba(255,255,255,0.6);">
+          <span style="color:#ff6a00;">✓</span> Festpreise
+        </span>
+        <span style="color:rgba(255,255,255,0.6);">
+          <span style="color:#ff6a00;">✓</span> In 7 Tagen live
+        </span>
+        <span style="color:rgba(255,255,255,0.6);">
+          <span style="color:#ff6a00;">✓</span> Next-Gen Systeme
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="wz-banner-spacer" style="height:130px"></div>
+
+</body>
+</html>
